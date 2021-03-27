@@ -1,5 +1,8 @@
-.App {
-  padding: 15px 0; 
+.App { 
   font-family: 'Montserrat', sans-serif;
-  color: #3a3c4e;
+  min-height: 100vh;
+}
+
+.App .search{
+	margin-top: 15px;
 }

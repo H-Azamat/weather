@@ -11,21 +11,21 @@ import drizzle from '../../assets/drizzle.svg';
 
 const useStyles = makeStyles({
     card: {
-        width: '400px',
-        marginTop: '30px',
+        width: '300px',
+        margin: '30px 0',
         padding: '10px 0'
     },
     cardImg: {
-        height: '100px',
-        marginRight: '20px'
+        height: '80px',
+        marginRight: '10px'
     },
     cardContent: {
-        padding: '20px 0'
+        padding: '5px 0'
     },
 })
 
 
-const WeatherCard = ({city, temp, feelsLike, description, weather}) => {
+const WeatherCard = ({city, temp, feelsLike, description, weather, otherData, date = null}) => {
 
     let [weatherImg, setWeatherImg] = useState();
     useEffect(() => {
@@ -39,27 +39,27 @@ const WeatherCard = ({city, temp, feelsLike, description, weather}) => {
         }
     }, [weather])
 
-    const classes = useStyles();
-    if(city){ 
-        return(
-            <Card raised className={classes.card}>
-                <CardContent>
-                    <Box fontWeight="fontWeightBold" align="center" fontSize={32} letterSpacing={1.5}>{city}</Box>
+    const classes = useStyles()
+    return(
+        <Card raised className={classes.card}>
+            <CardContent>
+                <Box fontWeight="fontWeightBold" align="center" fontSize={28} letterSpacing={1.5}>{city}</Box>
 
-                    <Box display="flex" justifyContent="center" alignItems="center" className={classes.cardContent}>
-                        <img src={weatherImg} alt={weather} className={classes.cardImg} />
-                        <Box component="span" textAlign="center" fontWeight="fontWeightBold" fontSize={42}>{temp}&#8451;</Box>
-                    </Box>
+                <Box display="flex" justifyContent="center" alignItems="center" className={classes.cardContent}>
+                    <img src={weatherImg} alt={weather} className={classes.cardImg} />
+                    <Box component="span" textAlign="center" fontWeight="fontWeightBold" fontSize={38}>{temp}&#8451;</Box>
+                </Box>
 
-                    <Box textAlign="center" fontWeight="fontWeightRegular" fontSize={20}>{description}</Box>
-                    <Box textAlign="center" fontWeight="fontWeightRegular" fontSize={19}>Ощущается как: {feelsLike}&#8451;</Box>
-
-                </CardContent>
-            </Card>
-        )
-    }else{
-     return <Box component="span" textAlign="center" fontWeight="fontWeightBold" fontSize={42}>Выберите город</Box>
-    }
+                <Box textAlign="center" fontWeight="fontWeightRegular" fontSize={16}>{description}</Box>
+                <Box textAlign="center" fontWeight="fontWeightRegular" fontSize={15}>Ощущается как: {feelsLike}&#8451;</Box>
+                <Box>
+                    <Box textAlign="center" fontWeight="fontWeightRegular" fontSize={15}>Влажнось: {otherData.humidity}%</Box>
+                    <Box textAlign="center" fontWeight="fontWeightRegular" fontSize={15}>Ветер: {otherData.windSpeed}км/ч</Box>
+                </Box>
+                {date ? <Box textAlign="center" fontWeight="fontWeightBold" fontSize={13}><br />{date}</Box> : ''}
+            </CardContent>
+        </Card>
+    )
 }
 
 export default WeatherCard;

@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 
 const instance = axios.create({
-    baseURL:"http://api.openweathermap.org/data/2.5/"
+    baseURL:"https://api.openweathermap.org/data/2.5/"
 })
 
 const API_KEY = 'f37933e3e4d8fafe41b8ac27a02772ab';
@@ -12,6 +12,8 @@ export const WeatherApi = {
     },
     getWeatherByCity(city){
         return instance.get(`weather?q=${city}&lang=ru&units=metric&appid=${API_KEY}`).then(res => res.data);
-        
+    },
+    getForecast(city){
+        return instance.get(`forecast?q=${city}&lang=ru&units=metric&appid=${API_KEY}`).then(res => res.data);
     }
 }
